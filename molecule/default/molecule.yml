@@ -6,10 +6,13 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: instance
-    image: centos:7
+  - name: instance-debian10
+    image: debian:buster
 provisioner:
   name: ansible
+  log: True
+  options:
+    v: True
   lint:
     name: ansible-lint
 verifier:

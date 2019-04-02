@@ -1,2 +1,45 @@
 ---
 # tasks file for ansible-libzmq
+- name: Uninstall system libzmq
+  package:
+    name:
+      - libzmq5
+      - libzmq3-dev
+    state: absent
+  tags: [ "libzmq" ]
+
+- name: Install libzmq dependencies
+  package:
+    name:
+      - uuid-dev
+      - liblz4-dev
+      - libsystemd-dev
+      - libpcre3-dev
+      - libpgm-dev
+      - libsodium-dev
+      - git
+    state: present
+  tags: [ "libzmq" ]
+
+- name: Clone libzmq
+  git:
+    repo: git://github.com/zeromq/libzmq.git
+    dest: /usr/src/libzmq
+    force: yes
+    version: v4.3.1
+  tags: [ "libzmq" ]
+
+- name: Build libzmq
+  shell: |
+    cd /usr/src/libzmq
+    ./autogen.sh
+    ./configure --prefix=/usr --with-libsodium
+    make
+    make install
+    ldconfig
+  tags: [ "libzmq" ]
+
+- name: Add libzmq ldconfig file
+  copy:
+    dest: /etc/ld.so.conf.d/libzmq.conf
+    content: '/usr/lib'
