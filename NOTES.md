@@ -10,8 +10,6 @@ cd my-role/
 python3 -m venv .venv
 source .venv/bin/activate
 pip install molecule[docker] docker-py
-pip uninstall docker-py
-pip install molecule[docker]
 ```
 
 It still doesn't work after this because of missing `SELinux` stuff, a bunch
@@ -23,6 +21,8 @@ cp -R /usr/lib64/python3.7/site-packages/selinux \
 cp -R /usr/lib64/python3.7/site-packages/_selinux.cpython-37m-x86_64-linux-gnu.so \
   .venv/lib/python3.7/site-packages/
 pip uninstall docker
+pip uninstall docker-py
+pip install molecule[docker]
 ```
 
 Do stuff ...
