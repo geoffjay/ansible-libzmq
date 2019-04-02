@@ -18,6 +18,7 @@
       - libpgm-dev
       - libsodium-dev
       - git
+      - libtool
     state: present
   tags: [ "libzmq" ]
 
