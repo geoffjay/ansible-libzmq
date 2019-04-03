@@ -17,7 +17,7 @@
       - libpcre3-dev
       - libpgm-dev
       - libsodium-dev
-      - git
+      - libtool
     state: present
   tags: [ "libzmq" ]
 
@@ -43,3 +43,4 @@
   copy:
     dest: /etc/ld.so.conf.d/libzmq.conf
     content: '/usr/lib'
+  tags: [ "libzmq" ]
