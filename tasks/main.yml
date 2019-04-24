@@ -11,6 +11,7 @@
 - name: Install libzmq dependencies
   package:
     name:
+      - git
       - uuid-dev
       - liblz4-dev
       - libsystemd-dev
